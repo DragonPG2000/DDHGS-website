@@ -1,115 +1,207 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <!-- Meta tags for social media banners -->
+  <meta name="description" content="We present DD-HGS, a novel framework that combines 3D Gaussian Splatting with hyperspectral diffusion modeling for high-fidelity 3D hyperspectral reconstruction." />
+  <meta property="og:title" content="Diffusion-Denoised Hyperspectral Gaussian Splatting" />
+  <meta property="og:description" content="We present DD-HGS, a novel framework that combines 3D Gaussian Splatting with hyperspectral diffusion modeling for high-fidelity 3D hyperspectral reconstruction." />
+  <meta property="og:url" content="https://your-site.github.io/" />
+  <meta property="og:image" content="static/images/Figure_2.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+  <meta name="twitter:title" content="Diffusion-Denoised Hyperspectral Gaussian Splatting" />
+  <meta name="twitter:description" content="We present DD-HGS, a novel framework that combines 3D Gaussian Splatting with hyperspectral diffusion modeling for high-fidelity 3D hyperspectral reconstruction." />
+  <meta name="twitter:image" content="static/images/Figure_2.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="keywords" content="3D Gaussian Splatting, Hyperspectral, Diffusion Models, 3D Reconstruction, Neural Rendering" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Diffusion-Denoised Hyperspectral Gaussian Splatting</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet" />
+
+  <link rel="stylesheet" href="static/css/bulma.min.css" />
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css" />
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css" />
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css" />
+  <link rel="stylesheet" href="static/css/index.css" />
+  <link rel="stylesheet" href="static/css/bulma-collapsible.min.css">
     <link rel="stylesheet" href="static/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="title">
-                <h1>Diffusion-Denoised Hyperspectral Gaussian Splatting</h1>
-                <h2>3DV 2026</h2>
-                <h2>Anonymous Authors</h2>
-                <p class="subtitle">Supplementary Materials and Extended Results</p>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">
+              Diffusion-Denoised Hyperspectral Gaussian Splatting
+            </h1>
+            <div class="is-size-5 publication-venue has-text-centered" style="margin-top: 0.5rem; margin-bottom: 1rem; width: 100%;">
+              <span class="venue">3DV 2026</span>
             </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://dragonpg2000.github.io/">Sunil Kumar Narayanan</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://junshao0104.github.io/">Lingjun Zhao</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://ganlumomo.github.io/">Lu Gan</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://ce.gatech.edu/directory/person/yongsheng-chen">Yongsheng Chen</a><sup>1</sup>
+              </span>
         </div>
 
-        <div class="section">
-            <h3 id="abstract">Abstract</h3>
-            <div class="toc">
-                <h4>Contents</h4>
-                <ul>
-                    <li><a href="#videos">Qualitative Videos</a></li>
-                    <li><a href="#pseudo-rgb">Pseudo-RGB Sensor Characterization</a></li>
-                    <li><a href="#detailed-scene-results">Detailed Scene Results</a></li>
-                    <li><a href="#ablation-studies">Ablation Studies</a> · <a href="#ablation-pe">Positional Encoding</a> · <a href="#ablation-sl">Spectral Loss</a> · <a href="#ablation-diffusion">Diffusion Steps</a></li>
-                    <li><a href="#runtime">Runtime and Memory Benchmarks</a></li>
-                    <li><a href="#ae-baselines">Autoencoder Baselines on BaySpec Dataset</a></li>
-                </ul>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <sup>1</sup>Georgia Institute of Technology
+              </span>
+                </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- Paper PDF link -->
+                <span class="link-block">
+                  <a href="https://drive.google.com/file/d/1j5LNjaxl7KrSbtGv3zGBjgQ0F77yx8me/view?usp=sharing" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Supplementary link -->
+                <span class="link-block">
+                  <a href="supplementary.html" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-alt"></i>
+                    </span>
+                    <span>Supplementary</span>
+                  </a>
+                </span>
+
+                <!-- Code link -->
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming soon)</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <span class="link-block">
+                  <a href="#" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                </div>
             </div>
+          </div>
+        </div>
+                  </div>
+    </div>
+  </section>
+
+  <!-- Teaser video-->
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <div class="columns is-centered">
+          <div class="column is-half">
+            <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 8px; overflow: hidden;">
+              <video poster="static/images/Figure_2.png" id="teaser-video" autoplay muted loop controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;">
+                <source src="static/videos/wavelength_sweep_anacampserous.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p class="has-text-centered" style="margin-top: 0.5rem; font-weight: 500;">Wavelength Sweep (Anacampserous)</p>
+          </div>
+          <div class="column is-half">
+            <div style="position: relative; width: 100%; padding-bottom: 56.25%; background: #000; border-radius: 8px; overflow: hidden;">
+              <video poster="static/images/Figure_2.png" id="diffusion-video" autoplay muted loop controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain;">
+                <source src="static/videos/diffusion_effect.mp4" type="video/mp4">
+              </video>
+            </div>
+            <p class="has-text-centered" style="margin-top: 0.5rem; font-weight: 500;">Diffusion Effect</p>
+            </div>
+        </div>
+        <br />
+        <h2 class="subtitle has-text-centered">
+          We present DD-HGS, a novel framework that combines 3D Gaussian Splatting with hyperspectral diffusion modeling for high-fidelity 3D hyperspectral reconstruction. Our approach achieves state-of-the-art performance on both spatial and spectral accuracy while maintaining real-time rendering capabilities.
+        </h2>
+      </div>
+            </div>
+  </section>
+  <!-- End teaser video -->
+
+  <!-- Paper abstract -->
+  <section class="section hero">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
             <p>
-                This appendix provides supplementary materials and extended results for our research on 
-                Diffusion Enhanced Gaussian Splatting for Hyperspectral 3D Reconstruction. We present 
-                additional experimental details, ablation studies, and comprehensive comparisons that 
-                support the findings presented in the main paper.
+              We present DD-HGS, a novel framework that combines 3D Gaussian Splatting with hyperspectral diffusion modeling for high-fidelity 3D hyperspectral reconstruction. Our approach achieves state-of-the-art performance on both spatial and spectral accuracy while maintaining real-time rendering capabilities. The framework leverages a wavelength encoder with positional encoding to capture spectral dependencies and employs a diffusion-based refinement module to enhance spectral fidelity. Extensive experiments on the BaySpec and Surface Optics datasets demonstrate significant improvements over existing NeRF-based and 3DGS-based methods in terms of PSNR, SSIM, SAM, and RMSE metrics.
             </p>
+          </div>
         </div>
-
-        <div class="content">
-            <div class="section">
-                <h3 id="videos">Qualitative Videos</h3>
-                <div class="video-grid">
-                    <div class="video-card">
-                        <video controls playsinline muted loop style="aspect-ratio: 16 / 9; width: 100%; background: #000;">
-                            <source src="static/videos/wavelength_sweep_anacampserous.mp4" type="video/mp4">
-                            Your browser does not support the video tag. If the video doesn't load, download it
-                            <a href="static/videos/wavelength_sweep_anacampserous.mp4">here</a>.
-                        </video>
-                        <h4>Wavelength Sweep (Anacampserous)</h4>
                     </div>
-                    <div class="video-card">
-                        <video controls playsinline muted loop style="aspect-ratio: 16 / 9; width: 100%; background: #000;">
-                            <source src="static/videos/diffusion_effect.mp4" type="video/mp4">
-                            Your browser does not support the video tag. If the video doesn't load, download it
-                            <a href="static/videos/diffusion_effect.mp4">here</a>.
-                        </video>
-                        <h4>Diffusion Effect</h4>
+                    </div>
+
+    <div class="container is-max-desktop" style="margin-top: 40px;">
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <img src="static/images/Figure_2.png" alt="Overview Architecture Diagram" style="width: 100%; max-width: 1000px; margin: 0 auto; display: block;"/>
+          <p class="has-text-centered" style="margin-top: 10px; font-style: italic; color: #666;">
+            Overview of our DD-HGS framework combining 3D Gaussian Splatting with hyperspectral diffusion modeling for high-fidelity 3D hyperspectral reconstruction.
+          </p>
                     </div>
                 </div>
             </div>
+  </section>
+  <!-- End paper abstract -->
 
+  <div class="container">
+    <div class="content">
+      <!-- Detailed Scene Results -->
             <div class="section">
-                <h3 id="pseudo-rgb">Pseudo-RGB Sensor Characterization</h3>
-                <p>
-                    To characterize the pseudo-RGB image sensor, we first localized the camera pose of a query RGB photo of the scene using COLMAP. Next, we use the closest corresponding ground truth hyperspectral image of the scene. We then used an RGB image of the scene (captured from a traditional camera) and identified <em>K</em> key points with varying color intensities. We used the corresponding hyperspectral intensities from the ground truth hyperspectral image for each keypoint to compute the per-keypoint pixel-level error. This error measures the difference between the RGB pixel values and the predicted pseudo-RGB intensities.
-                </p>
-                <p>The error function is defined as follows:</p>
-                <p>\[ \mathcal{L} = \sum_{i,j} \lVert \mathbf{I}^{\mathrm{RGB}}_{i,j} - \mathbf{R} \, \mathbf{I}^{\mathrm{HS}}_{i,j} \rVert_2^2 \]</p>
-                <p>
-                    where \( \mathbf{R} \in \mathbb{R}^{3 \times N} \) represents the pseudo-RGB transformation matrix, \( \mathbf{I}^{\mathrm{RGB}}_{i,j} \in \mathbb{R}^3 \) is the \((i, j)\) pixel of the query image, and \( \mathbf{I}^{\mathrm{HS}}_{i,j} \in \mathbb{R}^{N} \) is the corresponding pixel in the ground truth hyperspectral image. The pseudo-RGB transformation matrix is split into three \(N \times 1\) vectors: \( \mathbf{r}(\lambda), \mathbf{g}(\lambda), \mathbf{b}(\lambda) \).
-                </p>
-                <p>To simulate the behavior of an RGB sensor, we apply the pseudo-RGB transformation matrix as follows:</p>
-                <p>\[ \hat{\mathbf{I}}^{\mathrm{RGB}}_{i,j} = \begin{bmatrix} \mathbf{r}(\lambda) & \mathbf{g}(\lambda) & \mathbf{b}(\lambda) \end{bmatrix}^{\!T} \, \mathbf{I}^{\mathrm{HS}}_{i,j} \]</p>
-                <p>where \( \hat{\mathbf{I}}^{\mathrm{RGB}} \) denotes the simulated pseudo-RGB image.</p>
-                <div class="band-grid">
-                    <div class="band-item">
-                        <img src="static/images/400nm.png" alt="400 nm band" />
-                        <div class="band-label">400 nm</div>
-                    </div>
-                    <div class="band-item">
-                        <img src="static/images/500nm.png" alt="500 nm band" />
-                        <div class="band-label">500 nm</div>
-                    </div>
-                    <div class="band-item">
-                        <img src="static/images/600nm.png" alt="600 nm band" />
-                        <div class="band-label">600 nm</div>
-                    </div>
-                    <div class="band-item">
-                        <img src="static/images/700nm.png" alt="700 nm band" />
-                        <div class="band-label">700 nm</div>
-                    </div>
-                    <div class="band-item">
-                        <img src="static/images/rgb.png" alt="Pseudo-RGB visualization" />
-                        <div class="band-label">Pseudo-RGB</div>
-                    </div>
-                </div>
-            </div>
-
+      <details class="collapsible">
+        <summary class="collapsible-summary">
+          <h3>Detailed Scene Results</h3>
+        </summary>
+        <div class="collapsible-content">
+          <p>We provide per-scene quantitative metrics for our hyperspectral reconstructions. Our method achieves state-of-the-art performance across multiple evaluation metrics including PSNR, SSIM, SAM, and RMSE.</p>
+          
+          <!-- BaySpec Results -->
             <div class="section">
-                <h3 id="detailed-scene-results">Detailed Scene Results</h3>
-                <div class="subtoc">
-                    <a href="#bayspec-results">BaySpec</a> · <a href="#surface-optics-results">Surface Optics</a>
-                </div>
-                <p>We provide per-scene quantitative metrics for our hyperspectral reconstructions.</p>
-            </div>
-
-            <div class="section">
-                <h4 id="bayspec-results">BaySpec</h4>
+            <details class="collapsible">
+              <summary class="collapsible-summary">
+                <h4>BaySpec Dataset</h4>
+              </summary>
+              <div class="collapsible-content">
+                <p style="margin-bottom: 1rem; font-style: italic; color: #666;">Best results are highlighted in <strong>bold</strong>.</p>
                 <div class="table-wrapper">
                     <table class="results-table">
                         <thead>
@@ -162,51 +254,57 @@
                                 <td class="num">15.36</td><td class="num">0.4825</td><td class="num">0.0775</td><td class="num">0.0896</td>
                                 <td class="num">20.63</td><td class="num">0.5418</td><td class="num">0.0754</td><td class="num">0.0835</td>
                                 <td class="num">20.93</td><td class="num">0.6120</td><td class="num">0.0708</td><td class="num">0.0857</td>
-                                <td class="num">6.37</td>
+                                <td class="num">0.50</td>
                             </tr>
                             <tr>
                                 <th>MipNeRF360</th>
-                                <td class="num">25.93</td><td class="num">0.7378</td><td class="num">0.0311</td><td class="num">0.0510</td>
+                                <td class="num">25.93</td><td class="num">0.7378</td><td class="num"><strong>0.0311</strong></td><td class="num">0.0510</td>
                                 <td class="num">26.19</td><td class="num">0.7112</td><td class="num">0.0383</td><td class="num">0.0616</td>
                                 <td class="num">26.32</td><td class="num">0.7261</td><td class="num">0.0370</td><td class="num">0.0524</td>
-                                <td class="num">0.10</td>
+                                <td class="num">0.01</td>
                             </tr>
                             <tr>
                                 <th>Hyper-NeRF</th>
                                 <td class="num">20.07</td><td class="num">0.5811</td><td class="num">0.0725</td><td class="num">0.1521</td>
                                 <td class="num">19.50</td><td class="num">0.7505</td><td class="num">0.0843</td><td class="num">0.0893</td>
                                 <td class="num">20.39</td><td class="num">0.7260</td><td class="num">0.0493</td><td class="num">0.0732</td>
-                                <td class="num">0.12</td>
+                                <td class="num">0.47</td>
                             </tr>
                             <tr>
                                 <th>3DGS</th>
                                 <td class="num">22.65</td><td class="num">0.6309</td><td class="num">0.0516</td><td class="num">0.0885</td>
                                 <td class="num">27.71</td><td class="num">0.7311</td><td class="num">0.0276</td><td class="num">0.0525</td>
                                 <td class="num">27.92</td><td class="num">0.7596</td><td class="num">0.0431</td><td class="num">0.0596</td>
-                                <td class="num">18.70</td>
+                                <td class="num"><strong>78.10</strong></td>
                             </tr>
                             <tr>
                                 <th>Hyper-GS</th>
-                                <td class="num">27.00</td><td class="num">0.7299</td><td class="num">0.0390</td><td class="num">0.0474</td>
-                                <td class="num">27.70</td><td class="num">0.8354</td><td class="num">0.0271</td><td class="num">0.0414</td>
-                                <td class="num">26.92</td><td class="num">0.7545</td><td class="num">0.0188</td><td class="num">0.0469</td>
+                                <td class="num"><strong>27.00</strong></td><td class="num">0.7299</td><td class="num">0.0390</td><td class="num">0.0474</td>
+                                <td class="num">27.70</td><td class="num">0.8354</td><td class="num">0.0271</td><td class="num"><strong>0.0414</strong></td>
+                                <td class="num">26.92</td><td class="num">0.7545</td><td class="num"><strong>0.0188</strong></td><td class="num">0.0469</td>
                                 <td class="num">2.31</td>
                             </tr>
                             <tr>
-                                <th>HS-GS (Ours)</th>
-                                <td class="num"><strong>25.11</strong></td><td class="num"><strong>0.9347</strong></td><td class="num"><strong>0.0572</strong></td><td class="num"><strong>0.0244</strong></td>
-                                <td class="num"><strong>27.86</strong></td><td class="num"><strong>0.9362</strong></td><td class="num"><strong>0.0221</strong></td><td class="num"><strong>0.0417</strong></td>
-                                <td class="num"><strong>28.57</strong></td><td class="num"><strong>0.9490</strong></td><td class="num"><strong>0.0217</strong></td><td class="num"><strong>0.0381</strong></td>
-                                <td class="num"><strong>2.43</strong></td>
+                      <th><strong>DD-HGS (Ours)</strong></th>
+                                <td class="num">25.11</td><td class="num"><strong>0.9347</strong></td><td class="num">0.0572</td><td class="num"><strong>0.0244</strong></td>
+                                <td class="num"><strong>27.86</strong></td><td class="num"><strong>0.9362</strong></td><td class="num"><strong>0.0221</strong></td><td class="num">0.0417</td>
+                                <td class="num"><strong>28.57</strong></td><td class="num"><strong>0.9490</strong></td><td class="num">0.0217</td><td class="num"><strong>0.0381</strong></td>
+                                <td class="num">2.43</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
+            </details>
             </div>
 
+          <!-- Surface Optics Results -->
             <div class="section">
-                <h4 id="surface-optics-results">Surface Optics</h4>
+            <details class="collapsible">
+              <summary class="collapsible-summary">
+                <h4>Surface Optics Dataset</h4>
+              </summary>
+              <div class="collapsible-content">
+                <p style="margin-bottom: 1rem; font-style: italic; color: #666;">Best results are highlighted in <strong>bold</strong>.</p>
                 <div class="table-wrapper">
                     <table class="results-table">
                         <thead>
@@ -277,7 +375,7 @@
                                 <td class="num">3.56</td>
                             </tr>
                             <tr>
-                                <th>HS-GS (Ours)</th>
+                      <th><strong>DD-HGS (Ours)</strong></th>
                                 <td class="num"><strong>28.54</strong></td><td class="num">0.9191</td><td class="num">0.0043</td><td class="num"><strong>0.0040</strong></td>
                                 <td class="num"><strong>48.13</strong></td><td class="num">0.9340</td><td class="num"><strong>0.0019</strong></td><td class="num"><strong>0.0018</strong></td>
                                 <td class="num">2.95</td>
@@ -285,386 +383,144 @@
                         </tbody>
                     </table>
                 </div>
+            </details>
             </div>
+                </div>
+      </details>
+            </div>
+    <!-- End Detailed Scene Results -->
 
+    <!-- Qualitative Results -->
+    <div class="section">
+      <details class="collapsible">
+        <summary class="collapsible-summary">
+          <h3>Qualitative Results</h3>
+        </summary>
+        <div class="collapsible-content">
+          <p>We present qualitative comparisons of our method against baseline approaches on the BaySpec and Surface Optics datasets.</p>
+          
+          <!-- Spectral Curve Visualization -->
             <div class="section">
-                <h3 id="ablation-studies">Ablation Studies</h3>
-                <div class="subtoc">
-                    <a href="#ablation-pe">Positional Encoding</a> · <a href="#ablation-sl">Spectral Loss</a> · <a href="#ablation-diffusion">Diffusion Steps</a>
+            <details class="collapsible">
+              <summary class="collapsible-summary">
+                <h4>Spectral Curve Visualization</h4>
+              </summary>
+              <div class="collapsible-content">
+                <div class="container is-max-desktop" style="margin-top: 20px;">
+                  <div class="columns is-centered">
+                    <div class="column is-full">
+                      <img src="static/images/figure_bayspec.png" alt="Spectral Curve Visualization" style="width: 100%; max-width: 100%; margin: 0 auto; display: block;"/>
+                      <p class="has-text-centered" style="margin-top: 10px; font-style: italic; color: #666;">
+                        Spectral curve visualization comparing our DD-HGS method with baseline approaches.
+                      </p>
+                    </div>
+                    </div>
                 </div>
-                <p>We conduct comprehensive ablation studies to analyze the contribution of different components in our HS-GS framework.</p>
             </div>
+            </details>
+          </div>
+          <!-- End Spectral Curve Visualization -->
 
+          <!-- BaySpec -->
             <div class="section">
-                <h4 id="ablation-pe">Positional Encoding</h4>
-                <div class="table-wrapper">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">Method</th>
-                                <th colspan="2">Pinecone</th>
-                                <th colspan="2">Anacampserous</th>
-                                <th colspan="2">Caladium</th>
-                                <th colspan="2">Average</th>
-                            </tr>
-                            <tr>
-                                <th>PSNR ↑</th>
-                                <th>SSIM ↑</th>
-                                <th>PSNR ↑</th>
-                                <th>SSIM ↑</th>
-                                <th>PSNR ↑</th>
-                                <th>SSIM ↑</th>
-                                <th>PSNR ↑</th>
-                                <th>SSIM ↑</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>No PE</th>
-                                <td class="num">18.31</td>
-                                <td class="num">0.8424</td>
-                                <td class="num">22.84</td>
-                                <td class="num">0.7681</td>
-                                <td class="num">20.18</td>
-                                <td class="num">0.8691</td>
-                                <td class="num">20.44</td>
-                                <td class="num">0.8265</td>
-                            </tr>
-                            <tr>
-                                <th><em>L = 5</em></th>
-                                <td class="num">22.13</td>
-                                <td class="num">0.8496</td>
-                                <td class="num">23.04</td>
-                                <td class="num"><strong>0.7716</strong></td>
-                                <td class="num">20.54</td>
-                                <td class="num">0.8732</td>
-                                <td class="num">21.90</td>
-                                <td class="num"><strong>0.8315</strong></td>
-                            </tr>
-                            <tr>
-                                <th><em>L = 10 (Ours)</em></th>
-                                <td class="num"><strong>22.18</strong></td>
-                                <td class="num"><strong>0.8497</strong></td>
-                                <td class="num"><strong>23.05</strong></td>
-                                <td class="num">0.7703</td>
-                                <td class="num"><strong>20.66</strong></td>
-                                <td class="num"><strong>0.8738</strong></td>
-                                <td class="num"><strong>21.96</strong></td>
-                                <td class="num">0.8313</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <p>
-                    As shown in the table above and the figure below, the absence of positional embeddings (No Position) results in a significant loss of geometric structure and reflective details, particularly in the central regions and beyond-visual-range wavelengths of the Pinecone scene. The rendered details appear blurred and fail to represent fine textures accurately. To isolate the effect of positional encoding, all experiments in this study were conducted without the diffusion module.
-                </p>
-                <p>
-                    Introducing positional embeddings (L = 5) significantly improves the rendering of finer reflective details and geometric accuracy, as evident in the sharper edges and clearer representation of reflective regions in the scene. However, further increasing the number of positional embeddings from L = 5 to L = 10 provides only marginal improvements, with relatively small enhancements in continuity and fidelity. This highlights that while positional embeddings are critical for wavelength encoding, increasing them beyond a certain threshold yields diminishing returns in terms of rendering quality.
-                </p>
-                <div class="band-grid">
-                    <div class="band-item">
-                        <img src="static/images/no_ps.png" alt="No positional encoding" />
-                        <div class="band-label">No PE</div>
+            <details class="collapsible">
+              <summary class="collapsible-summary">
+                <h4>BaySpec</h4>
+              </summary>
+              <div class="collapsible-content">
+                <div class="container is-max-desktop" style="margin-top: 20px;">
+                  <div class="columns is-centered">
+                    <div class="column is-full">
+                      <img src="static/images/bayspec_vis.jpg" alt="BaySpec Qualitative Results" style="width: 100%; max-width: 100%; margin: 0 auto; display: block;"/>
+                      <p class="has-text-centered" style="margin-top: 10px; font-style: italic; color: #666;">
+                        Qualitative results on the BaySpec dataset comparing our DD-HGS method with baseline approaches.
+                      </p>
                     </div>
-                    <div class="band-item">
-                        <img src="static/images/5_ps.png" alt="L = 5 positional encoding" />
-                        <div class="band-label">L = 5</div>
-                    </div>
-                    <div class="band-item">
-                        <img src="static/images/10_ps.png" alt="L = 10 positional encoding (ours)" />
-                        <div class="band-label">L = 10 (Ours)</div>
-                    </div>
-                    <div class="band-item">
-                        <img src="static/images/gt_wavelength.png" alt="Ground Truth" />
-                        <div class="band-label">GT</div>
                     </div>
                 </div>
             </div>
+            </details>
+          </div>
+          <!-- End BaySpec -->
 
+          <!-- Surface Optics Qualitative Results -->
             <div class="section">
-                <h4 id="ablation-sl">Spectral Loss</h4>
-                <p>
-                    As shown in the table and figure below, the choice of Spectral Loss (SL) weight has a significant impact on rendering quality. To isolate the effect of spectral loss, all experiments in this section are conducted without the diffusion model. When the SL weight is set to 0.1, the rendered details in the central portion of the Pinecone plant are visible but lack refinement, and the reflective properties are not accurately captured.
-                </p>
-                <p>
-                    Increasing the SL weight to 0.2 leads to a noticeable improvement in rendering accuracy. The finer details, particularly in the central portion, are better defined, and the reflective regions exhibit improved fidelity. However, further increasing the SL weight to 0.3 yields diminishing returns and degrades rendering quality, over-darkening the central region and obscuring fine details.
-                </p>
-                <div class="table-wrapper">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th>\(w_3\)</th>
-                                <th>Pinecone PSNR ↑</th>
-                                <th>Pinecone SSIM ↑</th>
-                                <th>Anacampserous PSNR ↑</th>
-                                <th>Anacampserous SSIM ↑</th>
-                                <th>Caladium PSNR ↑</th>
-                                <th>Caladium SSIM ↑</th>
-                                <th>Average PSNR ↑</th>
-                                <th>Average SSIM ↑</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>0.1</th>
-                                <td class="num">22.06</td>
-                                <td class="num">0.8493</td>
-                                <td class="num">22.99</td>
-                                <td class="num">0.7692</td>
-                                <td class="num">20.56</td>
-                                <td class="num">0.8731</td>
-                                <td class="num">21.87</td>
-                                <td class="num">0.8305</td>
-                            </tr>
-                            <tr>
-                                <th>0.3</th>
-                                <td class="num">22.05</td>
-                                <td class="num">0.8497</td>
-                                <td class="num">22.81</td>
-                                <td class="num">0.7673</td>
-                                <td class="num">20.56</td>
-                                <td class="num">0.8744</td>
-                                <td class="num">21.81</td>
-                                <td class="num">0.8305</td>
-                            </tr>
-                            <tr>
-                                <th><strong>0.2 (Ours)</strong></th>
-                                <td class="num"><strong>22.18</strong></td>
-                                <td class="num"><strong>0.8497</strong></td>
-                                <td class="num"><strong>23.05</strong></td>
-                                <td class="num"><strong>0.7703</strong></td>
-                                <td class="num"><strong>20.66</strong></td>
-                                <td class="num"><strong>0.8738</strong></td>
-                                <td class="num"><strong>21.96</strong></td>
-                                <td class="num"><strong>0.8312</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+            <details class="collapsible">
+              <summary class="collapsible-summary">
+                <h4>Surface Optics Dataset</h4>
+              </summary>
+              <div class="collapsible-content">
+                <div class="container is-max-desktop" style="margin-top: 20px;">
+                  <div class="columns is-centered">
+                    <div class="column is-full">
+                      <img src="static/images/figure_main_qual.png" alt="Qualitative Results on Surface Optics Dataset" style="width: 100%; max-width: 100%; margin: 0 auto; display: block;"/>
+                      <p class="has-text-centered" style="margin-top: 10px; font-style: italic; color: #666;">
+                        Qualitative results on the Surface Optics dataset comparing our DD-HGS method with baseline approaches.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div class="band-grid">
-                    <div class="band-item">
-                        <img src="static/images/gt.png" alt="Ground Truth" />
-                        <div class="band-label">GT</div>
-                    </div>
-                    <div class="band-item">
-                        <img src="static/images/0.1.png" alt="w3 = 0.1" />
-                        <div class="band-label">w3 = 0.1</div>
-                    </div>
-                    <div class="band-item">
-                        <img src="static/images/0.2.png" alt="w3 = 0.2" />
-                        <div class="band-label">w3 = 0.2</div>
-                    </div>
-                    <div class="band-item">
-                        <img src="static/images/0.3.png" alt="w3 = 0.3" />
-                        <div class="band-label">w3 = 0.3</div>
-                    </div>
+            </div>
+            </details>
+          </div>
+          <!-- End Surface Optics Qualitative Results -->
+            </div>
+      </details>
+            </div>
+    <!-- End Qualitative Results -->
                 </div>
             </div>
 
-            <div class="section">
-                <h4 id="ablation-diffusion">Diffusion Steps</h4>
-                <p>
-                    We examine the effect of varying the number of diffusion steps on the final performance. Compared to vanilla 3DGS, the application of our hyperspectral diffusion module significantly improves both spectral accuracy (lower SAM) and visual sharpness (higher PSNR and SSIM). By varying the number of diffusion steps, we observe that the model with 1000 steps consistently yields the best results across all the hyperspectral scenes.
-                </p>
-                <div class="table-wrapper">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th rowspan="2">Steps</th>
-                                <th colspan="2">Pinecone</th>
-                                <th colspan="2">Anacampserous</th>
-                                <th colspan="2">Caladium</th>
-                            </tr>
-                            <tr>
-                                <th>PSNR ↑ / SSIM ↑</th>
-                                <th>SAM ↓ / RMSE ↓</th>
-                                <th>PSNR ↑ / SSIM ↑</th>
-                                <th>SAM ↓ / RMSE ↓</th>
-                                <th>PSNR ↑ / SSIM ↑</th>
-                                <th>SAM ↓ / RMSE ↓</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>10</th>
-                                <td class="num">24.91 / 0.9305</td><td class="num">0.0624 / 0.0272</td>
-                                <td class="num">27.63 / 0.9418</td><td class="num">0.0263 / 0.0435</td>
-                                <td class="num">27.42 / 0.9321</td><td class="num">0.0271 / 0.0450</td>
-                            </tr>
-                            <tr>
-                                <th>500</th>
-                                <td class="num">25.03 / 0.9332</td><td class="num">0.0593 / 0.0251</td>
-                                <td class="num">28.02 / 0.9450</td><td class="num">0.0250 / 0.0416</td>
-                                <td class="num">27.61 / 0.9349</td><td class="num">0.0255 / 0.0420</td>
-                            </tr>
-                            <tr>
-                                <th>1000</th>
-                                <td class="num"><strong>25.11 / 0.9347</strong></td><td class="num"><strong>0.0572 / 0.0244</strong></td>
-                                <td class="num"><strong>28.57 / 0.9490</strong></td><td class="num"><strong>0.0247 / 0.0381</strong></td>
-                                <td class="num"><strong>27.86 / 0.9362</strong></td><td class="num"><strong>0.0248 / 0.0312</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+  <!-- Start citation block -->
+  <section class="hero is-small has-background-white-bis">
+    <div class="hero-body">
+      <div class="container box column is-three-fifths">
+        <h2 class="title is-3">BibTeX</h2>
+        <!-- Copy button -->
+        <button class="button is-primary is-small" style="position: absolute; right: 0.75rem;" onclick="copyToClipboard('bibtex-code')"><i class="fas fa-solid fa-copy"></i>&nbsp; Copy</button>
+        <script>
+          function copyToClipboard(elementId) {
+            var copyText = document.getElementById(elementId);
+            var textArea = document.createElement("textarea");
+            textArea.value = copyText.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("Copy");
+            textArea.remove();
+          }
+        </script>
+        <!-- BibTeX code -->
+        <div id="bibtex-code"><pre><code>@article{ddhgs2026,
+  title={Diffusion-Denoised Hyperspectral Gaussian Splatting},
+  author={...},
+  journal={3DV},
+  year={2026}
+}</code></pre></div>
                 </div>
             </div>
+  </section>
 
-            <div class="section">
-                <h3 id="runtime">Runtime and Memory Benchmarks</h3>
-                <p>
-                    We provide a detailed evaluation and comparison of the runtime and memory consumption of HS-GS and other methods. The table below reports training time per iteration, peak GPU memory, number of Gaussians and inference speed in frames per second (FPS).
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p>
+              This page was built using the
+              <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project
+                Page Template</a>
+              which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              This website is licensed under a
+              <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative Commons
+                Attribution-ShareAlike 4.0 International
+                License</a>.
                 </p>
-                <p>
-                    We observed that the vanilla 3DGS model is the most efficient, achieving inference speeds above 75 FPS. The inclusion of the diffusion module increases memory usage and reduces inference speed to around 2.4 FPS. Despite this, HS-GS still performs much faster than NeRF-based methods in both training and rendering speed. In sum, HS-GS achieves a good balance between reconstruction performance and computational efficiency.
-                </p>
-                <div class="table-wrapper">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th>Method</th>
-                                <th>Train. Time (s)</th>
-                                <th>GPU Mem (GB)</th>
-                                <th>Gaussians</th>
-                                <th>FPS ↑</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>NeRF</th>
-                                <td class="num">821</td>
-                                <td class="num">10.9</td>
-                                <td class="num">-</td>
-                                <td class="num">0.13</td>
-                            </tr>
-                            <tr>
-                                <th>Hyper-NeRF</th>
-                                <td class="num">261</td>
-                                <td class="num">10.6</td>
-                                <td class="num">-</td>
-                                <td class="num">0.5</td>
-                            </tr>
-                            <tr>
-                                <th>3DGS</th>
-                                <td class="num">0.48</td>
-                                <td class="num">7.6</td>
-                                <td class="num">112,350</td>
-                                <td class="num">75.2</td>
-                            </tr>
-                            <tr>
-                                <th>3DGS + Diffusion</th>
-                                <td class="num">1.23</td>
-                                <td class="num">19.1</td>
-                                <td class="num">134,024</td>
-                                <td class="num">2.4</td>
-                            </tr>
-                            <tr>
-                                <th>3DGS + Spectral Loss</th>
-                                <td class="num">0.85</td>
-                                <td class="num">11.8</td>
-                                <td class="num">128,910</td>
-                                <td class="num">54.3</td>
-                            </tr>
-                            <tr>
-                                <th>3DGS + Wavelength Encoder</th>
-                                <td class="num">0.87</td>
-                                <td class="num">12.2</td>
-                                <td class="num">129,704</td>
-                                <td class="num">52.7</td>
-                            </tr>
-                            <tr>
-                                <th>HS-GS (Ours)</th>
-                                <td class="num">1.25</td>
-                                <td class="num">19.4</td>
-                                <td class="num">134,472</td>
-                                <td class="num">2.2</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
             </div>
-
-            <div class="section">
-                <h3 id="ae-baselines">Autoencoder Baselines on BaySpec Dataset</h3>
-                <p>
-                    To evaluate the performance of traditional low-dimensional latent reconstruction models on hyperspectral data, we train an autoencoder and a variational autoencoder on three representative plant scenes (Pinecone, Anacampserous, Caladium) from the BaySpec dataset.
-                </p>
-                <p>
-                    <strong>Autoencoder:</strong> We firstly train an autoencoder baseline using a U-Net-style encoder-decoder architecture. The autoencoder baseline consistently underperforms in both spatial and spectral metrics (PSNR, SSIM, SAM), demonstrating its inferior performance on preserving fine-grained spectral features across view-dependent geometry and material variations. Notably, SAM scores are significantly worse than those of 3DGS or our proposed HS-GS method, validating that simple bottleneck-based reconstructions are inadequate for hyperspectral consistency.
-                </p>
-                <p>
-                    <strong>Variational Autoencoder:</strong> Due to the high channel dimensionality of hyperspectral inputs (up to 141 bands), the VAE’s latent sampling and reconstruction pipeline ran out of memory in our experiment. This further reinforces the need for spatially conditioned and spectrally aware architectures, such as HS-GS, that can scale to such domains.
-                </p>
-                <div class="table-wrapper">
-                    <table class="results-table">
-                        <thead>
-                            <tr>
-                                <th>Method</th>
-                                <th>Scene</th>
-                                <th>PSNR ↑</th>
-                                <th>SSIM ↑</th>
-                                <th>RMSE ↓</th>
-                                <th>SAM ↓</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th rowspan="3">Autoencoder</th>
-                                <td>Pinecone</td><td class="num">10.45</td><td class="num">0.2841</td><td class="num">0.2763</td><td class="num">0.1984</td>
-                            </tr>
-                            <tr>
-                                <td>Anacampserous</td><td class="num">9.90</td><td class="num">0.2291</td><td class="num">0.3068</td><td class="num">0.2145</td>
-                            </tr>
-                            <tr>
-                                <td>Caladium</td><td class="num">11.02</td><td class="num">0.3187</td><td class="num">0.2634</td><td class="num">0.1862</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="3">3DGS</th>
-                                <td>Pinecone</td><td class="num">21.40</td><td class="num">0.8487</td><td class="num">0.0640</td><td class="num">0.0912</td>
-                            </tr>
-                            <tr>
-                                <td>Anacampserous</td><td class="num">22.61</td><td class="num">0.7622</td><td class="num">0.0682</td><td class="num">0.0451</td>
-                            </tr>
-                            <tr>
-                                <td>Caladium</td><td class="num">20.40</td><td class="num">0.8729</td><td class="num">0.0615</td><td class="num">0.0583</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="3">3DGS + Diffusion</th>
-                                <td>Pinecone</td><td class="num">24.50</td><td class="num">0.9285</td><td class="num">0.0292</td><td class="num">0.0621</td>
-                            </tr>
-                            <tr>
-                                <td>Anacampserous</td><td class="num">27.10</td><td class="num">0.9401</td><td class="num">0.0417</td><td class="num">0.0264</td>
-                            </tr>
-                            <tr>
-                                <td>Caladium</td><td class="num">26.92</td><td class="num">0.9263</td><td class="num">0.0439</td><td class="num">0.0249</td>
-                            </tr>
-                            <tr>
-                                <th rowspan="3">HS-GS (Ours)</th>
-                                <td>Pinecone</td><td class="num"><strong>25.11</strong></td><td class="num"><strong>0.9347</strong></td><td class="num"><strong>0.0244</strong></td><td class="num"><strong>0.0572</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Anacampserous</td><td class="num"><strong>28.57</strong></td><td class="num"><strong>0.9490</strong></td><td class="num"><strong>0.0381</strong></td><td class="num"><strong>0.0247</strong></td>
-                            </tr>
-                            <tr>
-                                <td>Caladium</td><td class="num"><strong>27.86</strong></td><td class="num"><strong>0.9362</strong></td><td class="num"><strong>0.0417</strong></td><td class="num"><strong>0.0224</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-
-
-
-
-
-
-
         </div>
-
-        <div class="footer">
-            <p>Diffusion Enhanced Gaussian Splatting for Hyperspectral 3D Reconstruction</p>
         </div>
     </div>
+  </footer>
 
-    <script src="static/script.js"></script>
 </body>
+
 </html>

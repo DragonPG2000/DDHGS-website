@@ -70,6 +70,14 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
+            // Ensure all ancestor collapsibles are opened
+            let node = target.parentElement;
+            while (node) {
+                if (node.matches && node.matches('details.collapsible')) {
+                    node.open = true;
+                }
+                node = node.parentElement;
+            }
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -119,4 +127,63 @@ function createScrollProgress() {
 }
 
 // Initialize scroll progress bar
-document.addEventListener('DOMContentLoaded', createScrollProgress); 
+document.addEventListener('DOMContentLoaded', createScrollProgress);
+
+// Make supplementary sections collapsible and add controls
+document.addEventListener('DOMContentLoaded', () => {
+    // Remove the main supplementary materials wrapper - just group subsections under their main sections
+    const content = document.querySelector('.content');
+    if (!content) return;
+
+    const sections = Array.from(content.querySelectorAll(':scope > .section'));
+
+    sections.forEach(section => {
+        if (section.closest('details.collapsible') && !section.closest('.main-collapsible')) {
+            // Already inside some collapsible grouping (nested), skip
+        }
+        if (section.querySelector(':scope > details.collapsible')) return;
+
+        const heading = section.querySelector(':scope > h3, :scope > h4');
+        if (!heading) return;
+        
+        // Skip the Acknowledgments section - keep it non-collapsible
+        if (heading.id === 'acknowledgments') return;
+        
+        const isMain = heading.tagName.toLowerCase() === 'h3';
+        if (!isMain) return;
+
+        const details = document.createElement('details');
+        details.className = 'collapsible';
+        details.open = false; // Start collapsed by default
+
+        const summary = document.createElement('summary');
+        summary.className = 'collapsible-summary';
+        summary.appendChild(heading);
+        details.appendChild(summary);
+
+        const body = document.createElement('div');
+        body.className = 'collapsible-content';
+
+        const ownNodes = Array.from(section.childNodes);
+        ownNodes.forEach(node => {
+            if (node !== details && node !== summary && node !== heading) {
+                if (node.nodeType === Node.ELEMENT_NODE && (node.matches('h3') || node.matches('h4'))) return;
+                body.appendChild(node);
+            }
+        });
+
+        let next = section.nextElementSibling;
+        while (next && next.classList.contains('section')) {
+            const subHead = next.querySelector(':scope > h3, :scope > h4');
+            if (!subHead || subHead.tagName.toLowerCase() !== 'h4') break;
+            body.appendChild(next);
+            next = section.nextElementSibling;
+        }
+
+        details.appendChild(body);
+        section.innerHTML = '';
+        section.appendChild(details);
+    });
+
+    // Controls removed per user request
+}); 
